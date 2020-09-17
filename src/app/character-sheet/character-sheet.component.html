@@ -1,0 +1,49 @@
+<div *ngIf="character">
+	<div class="container">
+		<div class="profile-card">
+			<label class="profile-card">Character Name:
+				<input class="profile-card" [(ngModel)]="character.name" placeholder="name"/>
+			</label>
+		</div>
+
+		<div class="left" >
+			<div class="attributes main">
+				<label class="attributes main title">Main Attributes</label>
+				<ul class="attributes main">
+					<li class="attributes main" *ngFor="let mAttr of character.MainAttributes">
+						<label class="attributes main">{{mAttr}}</label>
+						<input class="attributes main" [value]="character.getMAttrValue(mAttr)" placeholder="value" (change)="updateMainAttribute($event)" [name]="mAttr">
+					</li>
+				</ul>
+
+				<div class="attributes computed">
+					<label class="attributes computed title">Computed Attributes</label>
+					<ul class="attributes computed">
+						<li class="attributes computed" *ngFor="let cAttr of character.ComputedAttributes">
+							<label class="attributes computed" >{{cAttr}}</label>
+							<input class="attributes computed" [value]="character.getCAttrValue(cAttr)" placeholder="value" disabled>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="attributes skills">
+				<label class="attributes skills title">Skills</label>
+				<ul class="attributes skills">
+					<li class="attributes skills" *ngFor="let skill of character.Skills">
+						<label class="attributes skills">{{skill}}<span [class]='character.getRankName(skill).toLowerCase() + " rank"'>{{character.getRankName(skill)}}</span></label>						<input class="attributes skills" [value]="character.getSkillValue(skill)" placeholder="value" disabled>
+						<button class="attributes button" (click)="renewSkillValue(skill)">Renew</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="footer">
+			<input type="file"
+			(change)="import($event)"
+					id="importData" name="importData"
+					accept="application/JSON"/>
+			<button (click)="export()">Export</button>
+		</div>
+</div>
+</div>
