@@ -11,10 +11,10 @@ import { CCharacter } from "../../model/character";
 })
 export class CharacterSheet implements OnInit {
   character: CCharacter;
-  constructor(private route: ActivatedRoute, private heroService: CharacterService, private location: Location) {}
+  constructor(private route: ActivatedRoute, private location: Location) {}
 
   ngOnInit(): void {
-    this.character = new CCharacter({});
+    this.character = new CCharacter({} as any);
   }
 
   updateMainAttribute(event): void {
@@ -29,7 +29,7 @@ export class CharacterSheet implements OnInit {
   import(event): void {
     const reader = new FileReader();
     reader.addEventListener("load", (event) => {
-      const rawString = event.target.result.toString("base64");
+      const rawString = event.target.result.toString();
       const json = JSON.parse(window.atob(rawString.split("data:application/json;base64,")[1]));
       this.character = new CCharacter(json);
     });

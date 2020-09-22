@@ -104,7 +104,7 @@ export class CCharacter {
     return rank;
   }
 
-  public getRankName(sKey: string): number {
+  public getRankName(sKey: string): string {
     return RANKS[this.getSkillRank(sKey)];
   }
   /**
